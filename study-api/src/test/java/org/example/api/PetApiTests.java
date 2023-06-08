@@ -1,5 +1,6 @@
 package org.example.api;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PetApiTests {
@@ -12,4 +13,35 @@ public class PetApiTests {
                 .statusCode(404);
     }
 
+    @Test
+    void getPetById() {
+        API.getPet(1)
+                .then()
+                .statusCode(200)
+                .extract().response().body().print();
+    }
+
+    @Test
+    void findPetByStatus() {
+        API.getPetByStatus("sold")
+                .then()
+                .statusCode(200)
+                .extract().response().body().print();
+    }
+
+    @Test
+    void postPet() {
+        API.postPet()
+                .then()
+                .statusCode(200)
+                .extract().response().body().print();
+    }
+
+    @Test
+    void updateFieldsForPet() {
+        API.putPet()
+                .then()
+                .statusCode(200)
+                .extract().response().body().print();
+    }
 }
