@@ -1,5 +1,6 @@
 package org.example.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.Pet;
@@ -26,12 +27,21 @@ public class PetApi {
                 .get(BASE_URL + "/v2/pet/findByStatus?status={status}", status);
     }
 
-    public Response postPet(Pet requestData) {
+    public Response postPet(String jsonString) {
         return given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
-                .body(requestData)
+                .body(jsonString)
                 .when()
                 .post(BASE_URL + "/v2/pet");
+    }
+
+    public Response putPet(String jsonString) {
+        return given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(jsonString)
+                .when()
+                .put(BASE_URL + "/v2/pet");
     }
 }
